@@ -12,9 +12,9 @@ m1 <- blood_dep %>%
   filter(term == "class2" | term == "class3" | term == "class4") %>%
   cbind(., adj.p = p.adjust(.$p.value, "BH")) %>%
   mutate(marker = sub("_24", "", marker),
-         OR = exp(estimate) - 0.01,
-         OR.lci = exp(conf.low) - 0.01,
-         OR.uci = exp(conf.high) - 0.01,
+         exp_est = exp(estimate),
+         exp_lci = exp(conf.low),
+         exp_uci = exp(conf.high),
          model = "Basic",
          label = case_when(adj.p < 0.1 ~ "*"))
 
@@ -27,8 +27,9 @@ m2 <- blood_dep %>%
   filter(term == "class2" | term == "class3" | term == "class4") %>%
   cbind(., adj.p = p.adjust(.$p.value, "BH")) %>%
   mutate(marker = sub("_24", "", marker),
-         OR = exp(estimate) - 0.01,
-         OR.lci = exp(conf.low) - 0.01,
-         OR.uci = exp(conf.high) - 0.01,
+         exp_est = exp(estimate),
+         exp_lci = exp(conf.low),
+         exp_uci = exp(conf.high),
          model = "Adjusted",
          label = case_when(adj.p < 0.1 ~ "*"))
+
